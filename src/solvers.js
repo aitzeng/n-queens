@@ -16,7 +16,30 @@
 
 
 window.findNRooksSolution = function(n) {
-  var solution = undefined; //fixme
+
+  var solution = [];
+
+  if (solution.length === n) {
+    return solution;
+  }
+
+  var rowIndex = 0;
+  var colIndex = 0;
+
+  var checkCurrentIndex = function(rowIndex, colIndex) {
+
+      if (this.hasRowConflictAt(rowIndex) || this.hasColConflictAt(colIndex)) {
+        colIndex++;
+
+      if (!this.hasRowConflictAt(rowIndex) && !this.hasColConflictAt(colIndex)) {
+        this.togglePiece(rowIndex, colIndex);
+        solution.push(this.get(rowIndex))
+        rowIndex++;
+
+      checkCurrentIndex(rowIndex, colIndex)
+    }
+  }
+
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
